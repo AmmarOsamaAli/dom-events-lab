@@ -4,10 +4,14 @@ const numberBtn = document.querySelectorAll('.number')
 const operatorBtn = document.querySelectorAll('.operator')
 const equalsBtn = document.querySelector('.equals')
 const displayBar = document.querySelector('.display')
+const deleteBtn = document.querySelector('.delete')
+
 console.log(numberBtn)
 console.log(operatorBtn)
 console.log(equalsBtn)
 console.log(displayBar)
+console.log(deleteBtn)
+
 
 /*-------------------------------- Constants --------------------------------*/
 
@@ -39,9 +43,9 @@ function handleNumber() {
         displayBar.textContent += event.target.textContent
     }
 
-    // console.log('Number 1 = ' + num1)
-    // console.log('Number 2 = ' + num2)
-    // console.log('Operator = ' + operator)
+    console.log('Number 1 = ' + num1)
+    console.log('Number 2 = ' + num2)
+    console.log('Operator = ' + operator)
 
 }
 
@@ -55,12 +59,21 @@ function handleOperator() {
         operator = event.target.textContent
         displayBar.textContent = operator
     }
-    else if (num1 && num2 && operator) {
-        operator = event.target.textContent
-        displayBar.textContent = num1 + operator + num2
+    else if (num1 && num2 && operator && result) {
+        num1 = result
+        num2 = null
+        operator = null
+        if (num1 && !num2 && !operator) {
+            operator = event.target.textContent
+            displayBar.textContent += operator
+        }
+        else if (num1 && !num2 && operator) {
+            num2 = event.target.textContent
+            displayBar.textContent += num2
+        }
     }
-    
-    if(event.target.textContent === 'C'){
+
+    if (event.target.textContent === 'Clear') {
         num1 = null
         num2 = null
         operator = null
@@ -68,9 +81,9 @@ function handleOperator() {
         displayBar.textContent = null
     }
 
-    // console.log('Number 1 = ' + num1)
-    // console.log('Number 2 = ' + num2)
-    // console.log('Operator = ' + operator)
+    console.log('Number 1 = ' + num1)
+    console.log('Number 2 = ' + num2)
+    console.log('Operator = ' + operator)
 
 }
 
@@ -79,25 +92,33 @@ function handleEquals() {
         result = Number(num1) + Number(num2)
         displayBar.textContent = result
     }
-    else if(operator === '-'){
+    else if (operator === '-') {
         result = Number(num1) - Number(num2)
         displayBar.textContent = result
     }
-    else if(operator === '*'){
+    else if (operator === '*') {
         result = Number(num1) * Number(num2)
         displayBar.textContent = result
     }
-    else if(operator === '/'){
+    else if (operator === '/') {
         result = Number(num1) / Number(num2)
         displayBar.textContent = result
     }
     console.log(result)
 }
 
+function handleDelete (){
+    if(num1 || num2 || operator){
+        
+    }
+}
+
 
 /*----------------------------- Event Listeners -----------------------------*/
 
 equalsBtn.addEventListener('click', handleEquals)
+
+deleteBtn.addEventListener('click', handleDelete)
 
 for (let oneNumber of numberBtn) {
     oneNumber.addEventListener('click', handleNumber)
