@@ -13,8 +13,6 @@ console.log(displayBar)
 console.log(deleteBtn)
 
 
-/*-------------------------------- Constants --------------------------------*/
-
 /*-------------------------------- Variables --------------------------------*/
 
 let num1 = null
@@ -60,7 +58,7 @@ function handleOperator() {
         displayBar.textContent = operator
     }
     else if (num1 && num2 && operator && result) {
-        num1 = result
+        num1 = String(result)
         num2 = null
         operator = null
         if (num1 && !num2 && !operator) {
@@ -108,19 +106,21 @@ function handleEquals() {
 }
 
 function handleDelete() {
-    if (num1 && !operator && !num2) {
+
+    if (num1 && !operator && !num2 ) {
         num1 = num1.slice(0, -1)
         displayBar.textContent = num1
-    } else if (num1 && operator && !num2) {
+    }
+
+    else if (num1 && operator && !num2) {
         operator = operator.slice(0, -1)
         displayBar.textContent = num1 + operator
-    } else {
+    }
+    else if (num1 && operator && num2) {
         num2 = num2.slice(0, -1)
         displayBar.textContent = num1 + operator + num2
     }
 }
-
-
 
 
 /*----------------------------- Event Listeners -----------------------------*/
