@@ -107,11 +107,20 @@ function handleEquals() {
     console.log(result)
 }
 
-function handleDelete (){
-    if(num1 || num2 || operator){
-        
+function handleDelete() {
+    if (num1 && !operator && !num2) {
+        num1 = num1.slice(0, -1)
+        displayBar.textContent = num1
+    } else if (num1 && operator && !num2) {
+        operator = operator.slice(0, -1)
+        displayBar.textContent = num1 + operator
+    } else {
+        num2 = num2.slice(0, -1)
+        displayBar.textContent = num1 + operator + num2
     }
 }
+
+
 
 
 /*----------------------------- Event Listeners -----------------------------*/
